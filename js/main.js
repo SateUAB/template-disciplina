@@ -301,7 +301,7 @@ function addResource(container, data = null) {
     const div = document.createElement('div');
     div.className = 'resource-item';
     div.innerHTML = `
-        <div class="resource-header"><span class="resource-label">Novo Recurso</span><button type="button" class="btn btn-remove remove-res-btn">REMOVER</button></div>
+        <div class="resource-header"><span class="resource-label">Novo Recurso</span><button type="button" class="btn btn-remove remove-res-btn">Remover</button></div>
         <div class="grid">
             <div class="col-4"><label>Tipo</label><select class="res-type"><option value="" disabled selected>Selecione...</option><option>Fórum</option><option>Tarefa</option><option>Questionário</option><option>Wiki</option></select></div>
             <div class="col-8"><label>Título</label><input type="text" class="res-title"></div>
@@ -363,7 +363,7 @@ function addEvaluation(data = null) {
     div.className = 'item-card evaluation evaluation-item';
 
     div.innerHTML = `
-        <div class="item-header"><span class="item-title">Avaliação</span><button type="button" class="btn btn-remove remove-eval-btn">REMOVER</button></div>
+        <div class="item-header"><span class="item-title">Avaliação</span><button type="button" class="btn btn-remove remove-eval-btn">Remover</button></div>
         <div class="item-body">
             <div class="grid">
                 <div class="col-3"><label>Identificação</label><select class="eval-id"><option value="Autoavaliação">Autoavaliação</option><option value="NPC">NPC</option><option value="2ª Chamada NPC">2ª Chamada NPC</option><option value="NEF">NEF</option><option value="2ª Chamada NEF">2ª Chamada NEF</option></select></div>
