@@ -1,0 +1,997 @@
+:root {
+    /* --- Padrão Institucional UECE (Modern Glass) --- */
+
+    /* Cores Institucionais */
+    --uece-blue-deep: #003366;
+    /* Azul Profundo (Institucional) */
+    --uece-blue-mid: #0056b3;
+    /* Azul Vibrante (Ação/Avaliação) */
+    --uece-blue-light: #3b82f6;
+    /* Azul Claro (Recursos) */
+    --uece-blue-sky: #0ea5e9;
+    /* Sky Blue (Novo Accent) */
+
+    /* Legacy Mappings (for compatibility) */
+    --uece-green: var(--uece-blue-deep);
+    --uece-gold: var(--uece-blue-sky);
+    /* Remapping for safety */
+
+    /* Variações de Design (Glass) */
+    --primary: var(--uece-blue-deep);
+    --primary-glass: rgba(0, 51, 102, 0.85);
+    /* Deep Blue Glass */
+    --primary-bg: rgba(0, 51, 102, 0.05);
+    /* Tinted BG */
+
+    --accent: var(--uece-blue-sky);
+    --accent-glass: rgba(14, 165, 233, 0.9);
+
+    /* Superfícies de Vidro */
+    --glass-card: rgba(255, 255, 255, 0.75);
+    --glass-border: rgba(255, 255, 255, 0.6);
+    --glass-shadow: 0 8px 32px 0 rgba(0, 51, 102, 0.1);
+
+    /* Texto */
+    --text-main: #0f172a;
+    --text-muted: #64748b;
+
+    /* Inputs Modernos */
+    --input-bg: rgba(255, 255, 255, 0.8);
+    --input-border: rgba(203, 213, 225, 0.6);
+
+    /* Spacing */
+    --radius-lg: 24px;
+    --radius-md: 16px;
+    --radius-sm: 12px;
+}
+
+/* --- Base & Background Animado --- */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* CRITICAL RESET */
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 120px;
+    /* Offset for fixed header anchor links */
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: var(--text-main);
+    margin: 0;
+    padding: 100px 20px 60px;
+    /* Increased top padding for floating menu */
+    line-height: 1.6;
+    background-color: #f0f9ff;
+    /* Alice Blue / Light Blue Tint */
+    /* Fallback */
+    /* Mesh Gradient Sutil e Elegante */
+    background-image:
+        radial-gradient(at 0% 0%, rgba(255, 255, 255, 0.8) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, rgba(0, 51, 102, 0.15) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(14, 165, 233, 0.1) 0px, transparent 50%),
+        /* Sky Blue Tint */
+        radial-gradient(at 0% 100%, rgba(255, 255, 255, 0.8) 0px, transparent 50%);
+    background-attachment: fixed;
+    min-height: 100vh;
+}
+
+/* Orbs Flutuantes (Background Vivo) */
+.glass-bg-mesh {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.mesh-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.6;
+    animation: floatBlob 20s infinite alternate ease-in-out;
+}
+
+.blob-1 {
+    width: 600px;
+    height: 600px;
+    background: rgba(0, 51, 102, 0.12);
+    /* Blue */
+    top: -10%;
+    left: -10%;
+    animation-delay: 0s;
+}
+
+.blob-2 {
+    width: 500px;
+    height: 500px;
+    background: rgba(14, 165, 233, 0.12);
+    /* Sky Blue */
+    bottom: -10%;
+    right: -10%;
+    animation-delay: -5s;
+}
+
+.blob-3 {
+    width: 300px;
+    height: 300px;
+    background: rgba(59, 130, 246, 0.08);
+    /* Light Blue */
+    /* Azul Claro */
+    top: 40%;
+    left: 40%;
+    animation-delay: -10s;
+}
+
+@keyframes floatBlob {
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    100% {
+        transform: translate(40px, 60px) scale(1.1);
+    }
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+/* --- Glass Header --- */
+.main-header {
+    text-align: center;
+    margin-bottom: 60px;
+    padding: 60px 40px;
+    background: linear-gradient(135deg, rgba(0, 51, 102, 0.9), rgba(0, 42, 82, 0.95));
+    border-radius: var(--radius-lg);
+    color: white;
+    box-shadow: 0 20px 40px -10px rgba(0, 51, 102, 0.4);
+    /* Glow Blue */
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+}
+
+.main-header h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin: 0;
+}
+
+.main-header h2 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    margin-top: 10px;
+    opacity: 0.9;
+}
+
+/* --- Glass Cards (O Coração do Design) --- */
+.card {
+    background: var(--glass-card);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--glass-shadow);
+    padding: 0;
+    margin-bottom: 40px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 51, 102, 0.15);
+    /* Blue Shadow */
+}
+
+.card-header {
+    padding: 30px 40px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    display: flex;
+    align-items: center;
+}
+
+.card-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--uece-blue-deep);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    letter-spacing: -0.01em;
+}
+
+.step-badge {
+    background: linear-gradient(135deg, var(--uece-blue-deep), #002a52);
+    color: white;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    /* Soft square */
+    font-weight: 800;
+    font-size: 1rem;
+    box-shadow: 0 4px 10px rgba(0, 51, 102, 0.3);
+    /* Blue Shadow */
+}
+
+
+.card-body {
+    padding: 40px;
+}
+
+/* --- Inputs Modernos (Cápsula/Clean) --- */
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 14px 20px;
+    background: var(--input-bg);
+    border: 1px solid var(--input-border);
+    border-radius: var(--radius-sm);
+    font-family: inherit;
+    font-size: 1rem;
+    color: var(--text-main);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
+    /* Sombra interna sutil */
+}
+
+input:hover,
+select:hover,
+textarea:hover {
+    background: #fff;
+    border-color: #cbd5e1;
+    transform: translateY(-1px);
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    background: #fff;
+    border-color: var(--uece-blue-sky);
+    box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.15);
+    /* Anel de foco suave */
+    transform: translateY(-2px);
+}
+
+/* --- Botões Modernos --- */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 28px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    border-radius: var(--radius-sm);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    letter-spacing: 0.02em;
+}
+
+/* Botão Verde Principal -> Agora BLUE MID */
+.btn-solid-blue {
+    /* Compatibilidade JS */
+    background: linear-gradient(135deg, var(--uece-blue-mid), #002a52);
+    color: white;
+    width: 100%;
+    box-shadow: 0 4px 15px rgba(0, 51, 102, 0.25);
+}
+
+.btn-solid-blue:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 51, 102, 0.35);
+}
+
+/* Botões de Ação (Exportar) -> Agora Word Blue Faded */
+.btn-generate {
+    background: linear-gradient(135deg, #2b579a 0%, #4a77b8 100%);
+    /* Faded Word Blue */
+    color: white;
+    width: 100%;
+    font-size: 1.1rem;
+    padding: 20px;
+    box-shadow: 0 10px 30px rgba(43, 87, 154, 0.3);
+}
+
+.btn-generate:hover {
+    background: linear-gradient(135deg, #1e3f72 0%, #3a62a3 100%);
+    /* Darker Faded on Hover */
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(43, 87, 154, 0.4);
+}
+
+/* Botão Remover (Discreto) */
+.btn-remove {
+    background: rgba(239, 68, 68, 0.05);
+    color: #ef4444;
+    padding: 8px 16px;
+    font-size: 0.8rem;
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    margin-left: auto;
+}
+
+.btn-remove:hover {
+    background: #ef4444;
+    color: white;
+    transform: translateY(-1px);
+}
+
+
+/* --- Módulos & Itens (Cards dentro de Cards) --- */
+/* --- Módulos & Itens (Cards dentro de Cards) --- */
+.item-card {
+    background: #fff;
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+    margin-bottom: 24px;
+    overflow: visible;
+    position: relative;
+    border-left: 4px solid var(--uece-blue-deep);
+    /* Module Blue Border */
+    /* padding-left: 6px; Removed side strip */
+    /* background: linear-gradient(to right, var(--uece-blue-deep) 6px, #fff 6px); Removed */
+}
+
+/* Standardize Evaluation to Blue Deep (User Request) */
+.item-card.evaluation {
+    border-left: 4px solid var(--uece-blue-deep);
+    /* Deep Blue (Same as Module) */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.item-card.evaluation:hover {
+    box-shadow: 0 10px 20px rgba(0, 51, 102, 0.15);
+    /* Deep Blue shadow */
+    transform: translateY(-2px);
+    border-color: rgba(0, 51, 102, 0.3);
+    border-left-color: var(--uece-blue-deep);
+    /* Keep left border distinct on hover */
+}
+
+.evaluation .item-title {
+    color: var(--uece-blue-deep);
+    transition: color 0.3s ease;
+}
+
+.item-card.evaluation:hover .item-title {
+    text-shadow: 0 0 1px rgba(0, 51, 102, 0.1);
+}
+
+/* --- Modules Hover Effect --- */
+/* The module card itself is .item-card (without .evaluation). We can target it specifically or just make .item-card generic, but let's be safe. */
+.item-card:not(.evaluation) {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.item-card:not(.evaluation):hover {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+    transform: translateY(-2px);
+    border-color: rgba(0, 0, 0, 0.1);
+    border-left-color: var(--uece-blue-deep);
+    /* Keep left border distinct on hover */
+}
+
+.item-card:not(.evaluation):hover .item-title {
+    color: var(--uece-blue-deep);
+    /* Ensure it stays blue or pops */
+    text-shadow: 0 0 1px rgba(0, 51, 102, 0.1);
+}
+
+/* --- Resource Items (Nested) --- */
+.resource-item {
+    background: #f8fafc;
+    /* Slightly darker than white to show nesting */
+    border: 1px solid var(--input-border);
+    border-radius: var(--radius-sm);
+    padding: 16px;
+    margin-bottom: 16px;
+    position: relative;
+    transition: all 0.2s ease;
+    border-left: 4px solid #075985;
+    /* Dark Sky Blue (Distinct from Module Deep Blue) */
+}
+
+.resource-item:hover {
+    background: #fff;
+    box-shadow: 0 4px 12px rgba(7, 89, 133, 0.15);
+    /* Sky 800 shadow */
+    transform: translateY(-2px) scale(1.005);
+    /* Subtle pop */
+    border-color: #075985;
+    border-left-color: #075985;
+    /* Maintain border color on hover */
+}
+
+.resource-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.resource-label {
+    font-weight: 700;
+    color: #075985;
+    /* Dark Sky Blue */
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    transition: color 0.2s;
+}
+
+.resource-item:hover .resource-label {
+    color: #0369a1;
+    /* Slightly lighter Sky 700 on hover */
+    text-shadow: 0 0 1px rgba(3, 105, 161, 0.1);
+}
+
+.item-header {
+    background: transparent;
+    padding: 20px 24px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.item-title {
+    font-weight: 800;
+    color: var(--uece-blue-deep);
+    font-size: 1rem;
+    text-transform: uppercase;
+}
+
+.item-body {
+    padding: 24px;
+}
+
+/* ... */
+
+/* --- Date Inputs Fix (No Flex overlap) --- */
+.toggle-select {
+    padding: 8px 16px;
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid var(--input-border);
+    background: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.toggle-select:focus {
+    border-color: var(--uece-gold);
+    box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.1);
+}
+
+.datetime-group {
+    background: #f8fafc;
+    border: 1px solid var(--input-border);
+    padding: 16px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.datetime-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.datetime-header label {
+    margin: 0;
+    white-space: nowrap;
+}
+
+.datetime-header select {
+    width: auto;
+    min-width: 80px;
+}
+
+.date-inputs-container {
+    display: none;
+    grid-template-columns: 2fr 1fr;
+    gap: 12px;
+    /* 2:1 ratio for Date:Time */
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px dashed #e2e8f0;
+    width: 100%;
+}
+
+.date-inputs-container[style*="display: flex"] {
+    display: grid !important;
+}
+
+.date-inputs-container>div {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+    /* Prevent overflow */
+}
+
+.date-inputs-container label,
+.sub-label {
+    margin-bottom: 4px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+}
+
+/* Fix Overflow in Grid */
+.grid>div {
+    min-width: 0;
+}
+
+/* Crucial for preventing input overflow */
+/* --- Top Floating Navigation (Liquid Glass Pill) --- */
+.glass-nav {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    padding: 8px 12px;
+    border-radius: 50px;
+    /* Pill Shape */
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    z-index: 10000;
+    width: auto;
+    max-width: 95%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.glass-nav:hover {
+    background: rgba(255, 255, 255, 0.85);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+    transform: translateX(-50%) translateY(-2px);
+}
+
+.glass-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+}
+
+.glass-nav li {
+    margin: 0;
+    padding: 0;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: 30px;
+    color: var(--uece-blue-deep);
+    /* Darker for better contrast */
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-weight: 700;
+    /* Bolder */
+    font-size: 0.9rem;
+    white-space: nowrap;
+}
+
+/* Icons/Bullets */
+.nav-bullet {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--uece-blue-mid);
+    /* More visible */
+    transition: all 0.3s;
+    opacity: 0.5;
+}
+
+/* Hover & Active States */
+.nav-link:hover {
+    background: rgba(0, 51, 102, 0.08);
+    color: var(--uece-blue-deep);
+}
+
+.nav-link.active {
+    background: var(--uece-blue-deep);
+    color: white;
+    box-shadow: 0 4px 12px rgba(0, 51, 102, 0.25);
+}
+
+.nav-link.active .nav-bullet {
+    background: #fff;
+    transform: scale(1.2);
+    opacity: 1;
+}
+
+/* Text is always visible in Topbar */
+.nav-text,
+.nav-link span:not(.nav-bullet) {
+    display: inline-block;
+    opacity: 1;
+    max-width: none;
+    margin: 0;
+}
+
+/* Responsive: Hide text on small screens, show icons only? Or scrollable? */
+@media(max-width: 900px) {
+    .glass-nav {
+        top: auto;
+        bottom: 20px;
+        /* Move to bottom on mobile */
+        width: 90%;
+        justify-content: space-between;
+        padding: 10px 20px;
+    }
+
+    .glass-nav ul {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .nav-link {
+        padding: 8px;
+    }
+
+    .nav-link span:not(.nav-bullet) {
+        display: none;
+    }
+
+    /* Hide text on mobile */
+    .nav-bullet {
+        width: 12px;
+        height: 12px;
+    }
+}
+
+/* --- Validation Fix --- */
+input:required:invalid,
+select:required:invalid {
+    border-color: rgba(203, 213, 225, 0.8);
+    box-shadow: none;
+}
+
+input:required:invalid:focus {
+    border-color: #ef4444;
+}
+
+
+/* --- Utils & Grid --- */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 24px;
+    align-items: start;
+    /* Changed from end to start for top alignment */
+}
+
+.col-12 {
+    grid-column: span 12;
+}
+
+.col-9 {
+    grid-column: span 9;
+}
+
+.col-8 {
+    grid-column: span 8;
+}
+
+.col-6 {
+    grid-column: span 6;
+}
+
+.col-4 {
+    grid-column: span 4;
+}
+
+.col-3 {
+    grid-column: span 3;
+}
+
+/* Mobile */
+@media(max-width: 768px) {
+
+    .col-12,
+    .col-9,
+    .col-8,
+    .col-6,
+    .col-4,
+    .col-3 {
+        grid-column: span 12;
+    }
+
+    .grid {
+        gap: 16px;
+    }
+
+    .main-header {
+        padding: 40px 20px;
+    }
+
+    .card-body {
+        padding: 24px;
+    }
+}
+
+/* --- Feedback (Unified Soft Style) --- */
+.notice-box,
+.ps-note {
+    padding: 16px 20px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    line-height: 1.5;
+}
+
+.notice-info {
+    background: rgba(59, 130, 246, 0.08);
+    /* Soft Blue */
+    color: #1e40af;
+    border-color: rgba(59, 130, 246, 0.2);
+}
+
+.notice-info .icon {
+    font-size: 1.2rem;
+}
+
+.notice-warning {
+    background: rgba(245, 158, 11, 0.08);
+    /* Soft Orange */
+    color: #92400e;
+    border-color: rgba(245, 158, 11, 0.2);
+}
+
+.notice-danger {
+    background: rgba(239, 68, 68, 0.08);
+    /* Soft Red */
+    color: #991b1b;
+    border-color: rgba(239, 68, 68, 0.2);
+}
+
+/* P.S. Note (Purple/Pink Variance) */
+.ps-note {
+    background: rgba(168, 85, 247, 0.05);
+    /* Soft Purple */
+    color: #6b21a8;
+    border-color: rgba(168, 85, 247, 0.15);
+    margin-top: 12px;
+    margin-bottom: 0;
+    padding: 12px 16px;
+    font-size: 0.85rem;
+}
+
+.ps-note strong {
+    color: #581c87;
+    font-weight: 700;
+}
+
+/* --- Table (Frequency) --- */
+.table-wrapper {
+    border: 1px solid var(--input-border);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: #fff;
+}
+
+th {
+    text-align: left;
+    padding: 16px;
+    background: #f8fafc;
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    font-weight: 800;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+td {
+    padding: 12px 16px;
+    border-bottom: 1px solid #f1f5f9;
+    vertical-align: middle;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+/* Inputs inside table (override default underline if present) */
+td input {
+    background: var(--input-bg);
+    border: 1px solid var(--input-border);
+    border-radius: var(--radius-sm);
+    padding: 10px 14px;
+    width: 100%;
+    font-size: 0.95rem;
+}
+
+td input:focus {
+    border-color: var(--uece-gold);
+    box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.1);
+    transform: translateY(-1px);
+}
+
+/* Remove Button in Table */
+.remove-freq {
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin-left: auto;
+}
+
+/* Helpers */
+.hidden {
+    display: none !important;
+}
+
+/* --- Date Inputs Fix (No Flex overlap) --- */
+.toggle-select {
+    padding: 8px 16px;
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid var(--input-border);
+    background: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.toggle-select:focus {
+    border-color: var(--uece-gold);
+    box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.1);
+}
+
+.datetime-group {
+    background: #f8fafc;
+    border: 1px solid var(--input-border);
+    padding: 16px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.date-inputs-container {
+    display: none;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    /* Force grid layout */
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px dashed #e2e8f0;
+    width: 100%;
+}
+
+.date-inputs-container[style*="display: flex"] {
+    display: grid !important;
+    /* Override inline style from JS if necessary */
+}
+
+/* Ensure labels in date container are visible */
+.date-inputs-container label {
+    margin-bottom: 4px;
+    font-size: 0.7rem;
+}
+
+/* Toast */
+#toast-container {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.toast {
+    padding: 16px 24px;
+    border-radius: 12px;
+    color: white;
+    font-weight: 700;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.toast-success {
+    background: rgba(0, 51, 102, 0.9);
+}
+
+.toast-error {
+    background: rgba(239, 68, 68, 0.9);
+}
+
+.hiding {
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: all 0.4s;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* Auto-Evaluation Message Style (Like P.S.) */
+.auto-eval-msg {
+    margin-top: 16px;
+    padding: 12px 16px;
+    background: #f0f9ff;
+    /* Very Light Sky Blue */
+    border-left: 4px solid #0ea5e9;
+    /* Sky Blue Accent */
+    border-radius: 0 4px 4px 0;
+    color: #475569;
+    /* Slate 600 */
+    font-size: 0.9rem;
+    line-height: 1.5;
+}

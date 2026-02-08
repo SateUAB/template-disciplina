@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planejamento de Disciplina - SATE/UECE</title>
+
+    <!-- Bibliotecas Externas (Mantendo CDNs por enquanto, idealmente migrar para local/npm no futuro) -->
+    <script src="https://unpkg.com/docx@7.1.0/build/index.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+    <!-- Fonte -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Estilos -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="main-header">
+            <h1>Planejamento de Disciplina</h1>
+            <h2>SATE / UECE</h2>
+        </div>
+
+        <!-- Container de Notificações (Toasts) -->
+        <div id="toast-container" style="position: fixed; top: 20px; right: 20px; z-index: 1000;"></div>
+
+        <!-- Background Mesh Animado (UECE Modern) -->
+        <div class="glass-bg-mesh">
+            <div class="mesh-blob blob-1"></div>
+            <div class="mesh-blob blob-2"></div>
+            <div class="mesh-blob blob-3"></div>
+        </div>
+
+        <nav id="glass-nav" class="glass-nav">
+
+            <ul>
+                <li><a href="#section-identificacao" class="nav-link active"><span
+                            class="nav-bullet"></span>Identificação</a></li>
+                <li><a href="#section-material" class="nav-link"><span class="nav-bullet"></span>Material</a></li>
+                <li><a href="#section-modulos" class="nav-link"><span class="nav-bullet"></span>Módulos</a></li>
+                <li><a href="#section-avaliacoes" class="nav-link"><span class="nav-bullet"></span>Avaliações</a></li>
+                <li><a href="#section-calculo" class="nav-link"><span class="nav-bullet"></span>Cálculo</a></li>
+                <li><a href="#section-frequencia" class="nav-link"><span class="nav-bullet"></span>Frequência</a></li>
+            </ul>
+        </nav>
+
+        <div class="notice-box notice-info">
+
+            <div>
+                <strong>Prazos e Fluxo:</strong>
+                <ul style="margin: 5px 0 0 15px; padding:0; list-style: circle;">
+                    <li>Implantação de Disciplinas: <strong>14 dias úteis</strong></li>
+                    <li>Provas Online: <strong>45 dias úteis</strong></li>
+                    <li>Suporte: 48h a 72h</li>
+                </ul>
+                <div style="margin-top:8px; font-size:0.85rem;">Enviar arquivo gerado para:
+                    <strong>atendimentosate@uece.br</strong>
+                </div>
+            </div>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; margin-bottom: 20px;">
+            <button id="btn-clear-draft" class="btn btn-remove" style="margin-left: 10px;">Limpar Rascunho</button>
+            <span id="save-status"
+                style="margin-left: 10px; color: var(--text-muted); font-size: 0.8rem; align-self: center;"></span>
+        </div>
+
+        <form id="formPlanejamento">
+
+            <!-- Identificação -->
+            <div id="section-identificacao" class="card section-card">
+                <div class="card-header">
+                    <div class="card-title"><span class="step-badge">1</span> Identificação</div>
+                </div>
+                <div class="card-body">
+                    <div class="grid">
+                        <div class="col-3"> <label>Turma *</label> <input type="text" id="id_turma" name="id_turma"
+                                placeholder="COLOCAR A TURMA" required> </div>
+                        <div class="col-3"> <label>Semestre *</label> <input type="text" id="id_semestre"
+                                name="id_semestre" placeholder="Ex: 2024.1" required> </div>
+                        <div class="col-6"> <label>Curso *</label> <input type="text" id="id_curso" name="id_curso"
+                                required> </div>
+                        <div class="col-8"> <label>Disciplina *</label> <input type="text" id="id_disciplina"
+                                name="id_disciplina" placeholder="NOME DA DISCIPLINA" required> </div>
+                        <div class="col-4"> <label>Carga Horária</label> <input type="text" id="id_ch" name="id_ch"
+                                placeholder="CARGA HORÁRIA"> </div>
+                        <div class="col-12"> <label>Polos</label> <input type="text" id="id_polos" name="id_polos">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Material -->
+            <div id="section-material" class="card section-card">
+                <div class="card-header">
+                    <div class="card-title"><span class="step-badge">2</span> Material Didático</div>
+                </div>
+                <div class="card-body">
+                    <div class="grid">
+                        <div class="col-12"> <label>Link do Livro (Biblioteca)</label> <input type="url" id="mat_livro"
+                                name="mat_livro" placeholder="Colocar o link do arquivo alocado na biblioteca da UECE">
+                        </div>
+                        <div class="col-12"> <label>Material Adicional</label> <textarea id="mat_adicional"
+                                name="mat_adicional"
+                                placeholder="ARTIGOS E DOCUMENTOS OFICIAIS, VÍDEOS, SLIDES..."></textarea> </div>
+                        <div class="col-12">
+                            <div class="notice-box notice-danger" style="margin-bottom:0;">
+                                <div><strong>Direitos Autorais:</strong> A reprodução não autorizada é passível de
+                                    punição.</div>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <label>Webconf / Sala Virtual</label>
+                            <div class="grid" style="gap: 12px; grid-template-columns: 1fr 2fr;">
+                                <div style="grid-column: span 1;">
+                                    <select id="webconf_type" name="webconf_type">
+                                        <option value="" disabled selected>Selecione...</option>
+                                        <option value="padrao">Ferramenta Padrão (Moodle)</option>
+                                        <option value="personalizado">Link Personalizado (RNP)</option>
+                                    </select>
+                                </div>
+                                <div style="grid-column: span 1;" id="webconf_url_container" class="hidden">
+                                    <input type="url" id="mat_webconf" name="mat_webconf"
+                                        placeholder="Cole o link da sua sala RNP aqui...">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Módulos -->
+            <div id="section-modulos" class="card section-card">
+                <div class="card-header">
+                    <div class="card-title"><span class="step-badge">3</span> Conteúdo (Módulos)</div>
+                </div>
+                <div class="card-body">
+                    <div id="modulesContainer"></div>
+                    <button type="button" id="btn-add-module" class="btn btn-solid-blue">+ Adicionar Novo
+                        Módulo</button>
+                </div>
+            </div>
+
+            <!-- Avaliações -->
+            <div id="section-avaliacoes" class="card section-card">
+                <div class="card-header">
+                    <div class="card-title"><span class="step-badge">4</span> Avaliações</div>
+                </div>
+                <div class="card-body">
+                    <div class="notice-box notice-warning">
+                        <!-- Icon Removed -->
+                        <div><strong>Atenção ao Prazo:</strong> Implantação de Provas Online requer <strong>45 dias
+                                úteis</strong> de antecedência.</div>
+                    </div>
+                    <div id="evaluationsContainer"></div>
+                    <button type="button" id="btn-add-evaluation" class="btn btn-solid-blue" style="margin-top:20px;">+
+                        Adicionar Outra Avaliação</button>
+                </div>
+            </div>
+
+            <!-- Cálculo de Notas -->
+            <div id="section-calculo" class="card section-card">
+                <div class="card-header">
+                    <div class="card-title"><span class="step-badge">5</span> Cálculo de Notas</div>
+                </div>
+                <div class="card-body">
+                    <div class="grid">
+                        <div class="col-6">
+                            <label>NPC 1</label>
+                            <input type="text" id="calc_npc1" name="calc_npc1" placeholder="Avaliação (NPC)">
+                        </div>
+                        <div class="col-6">
+                            <label>NPC 2</label>
+                            <input type="text" id="calc_npc2" name="calc_npc2"
+                                placeholder="Média das atividades + Média dos fóruns">
+                        </div>
+                        <div class="col-12">
+                            <label>Média Final</label>
+                            <textarea id="calc_media" name="calc_media" rows="2"
+                                placeholder="((NPC1*5) + (NPC2*4) + (AUTOAVALIAÇÃO*1)) / 10"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Frequência -->
+            <div id="section-frequencia" class="card section-card">
+                <div class="card-header">
+                    <div class="card-title"><span class="step-badge">6</span> Frequência</div>
+                </div>
+                <div class="card-body">
+                    <div class="notice-box notice-danger">
+                        <span class="icon">ℹ️</span>
+                        <div>* A carga horária máxima de uma atividade é 23h.</div>
+                    </div>
+                    <div class="table-wrapper">
+                        <table class="freq-table" id="freqTable">
+                            <thead>
+                                <tr>
+                                    <th width="30%">Data</th>
+                                    <th width="20%">CH (0-23)</th>
+                                    <th>Descrição da Atividade</th>
+                                    <th width="5%"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Linhas inseridas via JS -->
+                            </tbody>
+                            <tfoot>
+                                <tr style="background-color: #f8fafc;">
+                                    <td style="text-align:right; font-weight:bold;">Total Carga Horária:</td>
+                                    <td><input type="text" id="total_ch" readonly
+                                            style="font-weight:bold; color:var(--primary);"></td>
+                                    <td></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <button type="button" id="btn-add-freq" class="btn btn-solid-blue"
+                        style="width:auto; margin-top:15px; display:flex; margin-left:auto;">+ Inserir Data na
+                        Frequência</button>
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 20px; margin-top: 40px;">
+                <button type="button" id="btn-generate-word" class="btn btn-generate">📥 Gerar Arquivo Word
+                    (.docx)</button>
+            </div>
+
+            <br><br>
+        </form>
+    </div>
+
+    <!-- Lógica Principal -->
+    <script type="module" src="js/main.js"></script>
+
+</body>
+
+</html>
